@@ -1,3 +1,4 @@
+
 package com.smarttaskflow.service;
 
 import com.smarttaskflow.model.Task;
@@ -6,7 +7,6 @@ import com.smarttaskflow.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 
 @Service
 public class TaskService {
@@ -23,6 +23,7 @@ public class TaskService {
 
     public Task createTask(Task task) {
         task.setStatus(TaskStatus.PENDING);
+        task.setCompleted(false);
         return repository.save(task);
     }
 
@@ -32,7 +33,10 @@ public class TaskService {
 
     public Task updateStatus(Long id, TaskStatus status) {
         Task task = repository.findById(id).orElseThrow();
+
         task.setStatus(status);
+        task.setCompleted(status == TaskStatus.COMPLETED);
+
         return repository.save(task);
     }
 }
