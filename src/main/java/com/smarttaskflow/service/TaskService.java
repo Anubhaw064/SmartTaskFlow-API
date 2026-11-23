@@ -1,6 +1,7 @@
 
 package com.smarttaskflow.service;
 
+import com.smarttaskflow.model.TaskPriority;
 import com.smarttaskflow.model.Task;
 import com.smarttaskflow.model.TaskStatus;
 import com.smarttaskflow.repository.TaskRepository;
@@ -19,6 +20,9 @@ public class TaskService {
 
     public List<Task> getAllTasks() {
         return repository.findAll();
+    }
+    public List<Task> getTasksByPriority(TaskPriority priority) {
+        return repository.findByPriority(priority);
     }
 
     public Task createTask(Task task) {
