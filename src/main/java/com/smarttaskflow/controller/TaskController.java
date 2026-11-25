@@ -5,6 +5,8 @@ import com.smarttaskflow.model.Task;
 import com.smarttaskflow.model.TaskPriority;
 import com.smarttaskflow.service.TaskService;
 import org.springframework.web.bind.annotation.*;
+import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.List;
 
@@ -42,5 +44,13 @@ public class TaskController {
     @GetMapping("/priority/{priority}")
     public List<Task> getTasksByPriority(@PathVariable TaskPriority priority) {
         return service.getTasksByPriority(priority);
+    }
+    @GetMapping("/deadline")
+    public List<Task> getTasksByDeadline(
+            @RequestParam
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate deadline) {
+
+        return service.getTasksByDeadline(deadline);
     }
 }

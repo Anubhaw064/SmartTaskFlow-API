@@ -8,6 +8,7 @@ import com.smarttaskflow.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.time.LocalDate;
 
 @Service
 public class TaskService {
@@ -23,6 +24,9 @@ public class TaskService {
     }
     public List<Task> getTasksByPriority(TaskPriority priority) {
         return repository.findByPriority(priority);
+    }
+    public List<Task> getTasksByDeadline(LocalDate deadline) {
+        return repository.findByDeadlineLessThanEqual(deadline);
     }
 
     public Task createTask(Task task) {
