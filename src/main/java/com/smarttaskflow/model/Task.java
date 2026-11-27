@@ -1,5 +1,12 @@
 package com.smarttaskflow.model;
 
+import com.smarttaskflow.entity.User;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import com.fasterxml.jackson.annotation.JsonIgnore;import com.smarttaskflow.entity.User;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 
@@ -27,6 +34,10 @@ public class Task {
     private TaskPriority priority;
 
     private LocalDate deadline;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
     public Long getId() {
         return id;
@@ -54,6 +65,14 @@ public class Task {
 
     public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 
